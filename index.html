@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BankSim Security Firewall</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>BANKSIM</h1>
+    <p>AI SECURITY FIREWALL</p>
+  </header>
+
+  <section class="panel">
+    <h2>Banking Request Analysis</h2>
+
+    <label for="request">Your banking request</label>
+    <input id="request" type="text"
+      placeholder="e.g. check balance">
+
+    <label for="memo">Transaction memo</label>
+    <textarea id="memo"
+      placeholder="Enter memo (optional)"></textarea>
+
+    <button
+    onclick="analyzeRequest()">
+      ANALYSE REQUEST
+    </button>
+  </section>
+
+  <section class="panel">
+    <h2>Security Report</h2>
+    <p>Status: <span id="status">AWAITING INPUT</span></p>
+    <p>Risk Score: <span id="risk">--</span></p>
+    <p>Threat Category: <span id="threat">--</span></p>
+    <p id="explanation">Submit a request to begin.</p>
+  </section>
+</div>
+</body>
+<script>
+function analyzeRequest() {
+  const request = document.getElementById("request")
+    .value.toLowerCase().trim();
+
+  const memo = document.getElementById("memo")
+    .value.toLowerCase();
+
+  const threats = [
+    "ignore previous instructions",
+    "ignore all security rules",
+    "bypass security",
+    "reveal confidential",
+    "jailbreak",
+    "override system instructions"
+  ];
+
+  let status = "BLOCKED";
+  let risk = 60;
+  let category = "AMBIGUOUS_REQUEST";
+  let explanation = "Request not recognized.";
+
+  if (request === "") {
+    explanation = "Please enter a banking request.";
+  } else if (
+    threats.some(t => request.includes(t)) ||
+    threats.some(t => memo.includes(t))
+  ) {
+    risk = 95;
+    category = "PROMPT_INJECTION";
+    explanation = "Suspicious instructions detected.";
+  } else if (
+    ["check balance", "show balance",
+     "check my balance"].includes(request)
+  ) {
+    status = "APPROVED";
+    risk = 0;
+    category = "NONE";
+    explanation = "Balance inquiry accepted (demo only).";
+  }
+
+  document.getElementById("status").textContent = status;
+  document.getElementById("risk").textContent = risk;
+  document.getElementById("threat").textContent = category;
+  document.getElementById("explanation").textContent = explanation;
+}
+</script>
+</html>
