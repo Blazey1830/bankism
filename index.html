@@ -79,6 +79,37 @@ function analyzeRequest() {
     category = "NONE";
     explanation = "Balance inquiry accepted (demo only).";
   }
+  else if (request.startsWith("transfer ")) {
+    const match = request.match(
+      /^transfer\s+(\d+(?:\.\d{1,2})?)\s+to\s+account\s+(\d+)$/
+    );
+
+    if (!match) {
+      status = "BLOCKED";
+      risk = 60;
+      category = "INVALID_TRANSFER_FORMAT";
+      explanation = "Use: transfer 500 to account 1234 (demo only).";
+    } else {
+      const amount = Number(match[1]);
+
+      if (amount <= 0) {
+        status = "BLOCKED";
+        risk = 70;
+        category = "INVALID_AMOUNT";
+        explanation = "Transfer amount must be positive.";
+      } else if (amount > 5000) {
+        status = "BLOCKED";
+        risk = 40;
+        category = "INSUFFICIENT_FUNDS";
+        explanation = "Insufficient demo balance (₹5000).";
+      } else {
+        status = "APPROVED";
+        risk = 10;
+        category = "NONE";
+        explanation = "Transfer validated in simulation only. No money moved.";
+      }
+    }
+  }
 
   document.getElementById("status").textContent = status;
   document.getElementById("risk").textContent = risk;
