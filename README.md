@@ -1,6 +1,6 @@
 # bankism
 a rule based banking security firewall simulation
-Bankism — Banking Security Firewall
+
 
 Bankism is a beginner-friendly, rule-based prototype that simulates a defensive security layer for banking requests.
 
