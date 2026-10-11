@@ -1,8 +1,8 @@
 # bankism
 a rule based banking security firewall simulation
-BankSim — Banking Security Firewall
+Bankism — Banking Security Firewall
 
-BankSim is a beginner-friendly, rule-based prototype that simulates a defensive security layer for banking requests.
+Bankism is a beginner-friendly, rule-based prototype that simulates a defensive security layer for banking requests.
 
 Problem
 
@@ -31,7 +31,7 @@ Run the Python prototype separately in a Python 3 environment.
 
 Limitations
 
-BankSim is an educational simulation, not a production banking system. It does not connect to real accounts, move money, or provide comprehensive AI-based security. Its detection rules are limited and can miss attacks.
+Bankism is an educational simulation, not a production banking system. It does not connect to real accounts, move money, or provide comprehensive AI-based security. Its detection rules are limited and can miss attacks.
 
 Future Improvements
 
